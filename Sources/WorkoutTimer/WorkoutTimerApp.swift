@@ -5,7 +5,8 @@ import WorkoutCore
 @main
 struct WorkoutTimerApp: App {
     @State private var store = WorkoutStore()
-    @State private var running: Workout?
+    @State private var run: RunController?
+    @State private var sound: SoundPlayer?
 
     init() {
         // Launched as a bare executable (swift run) the app would otherwise stay in the background.
@@ -15,8 +16,25 @@ struct WorkoutTimerApp: App {
 
     var body: some Scene {
         WindowGroup("Workout Timer") {
-            ContentView(store: store, onStart: { running = $0 })
-                .frame(minWidth: 760, minHeight: 520)
+            Group {
+                if let run {
+                    TimerView(run: run, onClose: { self.run = nil })
+                } else {
+                    ContentView(store: store, onStart: start)
+                }
+            }
+            .frame(minWidth: 760, minHeight: 560)
         }
+        Settings {
+            SettingsView()
+        }
+    }
+
+    private func start(_ workout: Workout) {
+        let player = sound ?? SoundPlayer()
+        sound = player
+        let controller = RunController(workout: workout, sound: player)
+        run = controller
+        controller.start()
     }
 }
