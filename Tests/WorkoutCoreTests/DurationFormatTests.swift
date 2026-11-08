@@ -29,4 +29,9 @@ import Testing
         #expect(DurationFormat.parse("0") == 1)
         #expect(DurationFormat.parse("99:00") == 3600)
     }
+
+    @Test func hugeInputDoesNotCrash() {
+        #expect(DurationFormat.parse("999999999999999999:00") == 3600)
+        #expect(DurationFormat.parse("99999999999999999999") == nil)
+    }
 }

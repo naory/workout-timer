@@ -25,7 +25,14 @@ struct DurationField: View {
                 .labelsHidden()
         }
         .onAppear { text = DurationFormat.format(seconds) }
-        .onChange(of: seconds) { _, new in text = DurationFormat.format(new) }
+        // Write every valid keystroke through, so Start (⌘↩) or Quit never miss an uncommitted edit.
+        .onChange(of: text) { _, new in
+            if let value = DurationFormat.parse(new), value != seconds { seconds = value }
+        }
+        // Reformat only when the change didn't come from the text being typed (e.g. the stepper).
+        .onChange(of: seconds) { _, new in
+            if DurationFormat.parse(text) != new { text = DurationFormat.format(new) }
+        }
     }
 
     private var clampedSeconds: Binding<Int> {

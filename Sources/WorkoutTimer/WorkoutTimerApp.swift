@@ -2,8 +2,14 @@ import AppKit
 import SwiftUI
 import WorkoutCore
 
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    // A single-window app: closing it quits, so a running workout can't keep beeping with no window.
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
+}
+
 @main
 struct WorkoutTimerApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var store = WorkoutStore()
     @State private var run: RunController?
     @State private var sound: SoundPlayer?

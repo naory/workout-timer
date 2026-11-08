@@ -22,7 +22,9 @@ public enum DurationFormat {
         let total: Int
         switch n.count {
         case 1: total = n[0]
-        case 2 where n[1] < 60: total = n[0] * 60 + n[1]
+        case 2 where n[1] < 60:
+            // Cap minutes before multiplying so absurd input clamps instead of overflowing.
+            total = min(n[0], Limits.seconds.upperBound) * 60 + n[1]
         default: return nil
         }
         return Limits.clamp(total, Limits.seconds)

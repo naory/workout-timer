@@ -17,6 +17,7 @@ struct TimerView: View {
             }
         }
         .environment(\.colorScheme, .dark)
+        .onDisappear { run.stop() }
         .confirmationDialog("End this workout?", isPresented: $confirmStop) {
             Button("End Workout", role: .destructive) { close() }
             Button("Keep Going", role: .cancel) {}
