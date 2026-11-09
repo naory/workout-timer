@@ -9,6 +9,10 @@ I was looking for a simple subscription-free timer app for my workout routines a
 A Mac interval timer for structured workouts: sets of named rounds, per-set work/rest times and
 repeat counts, a big colour-coded countdown (red = work, green = rest) and audio cues.
 
+<p align="center">
+  <img src="docs/screenshots/timer.png" alt="Timer screen during a work round: set 1/2, round 2/3, Push-ups, 30 seconds in red" width="720">
+</p>
+
 ## Features
 
 **Build your workouts**
