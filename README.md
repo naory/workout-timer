@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Resources/icon-1024.png" alt="Workout Timer app icon" width="160">
+</p>
+
 # Workout Timer
 
 I was looking for a simple subscription-free timer app for my workout routines and since I couldn't find one I decided to build one ;)
